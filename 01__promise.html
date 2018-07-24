@@ -7,19 +7,27 @@
        {
         fetch("https://restcountries.eu/rest/v2/all?fields=name")
                 .then(res => res.json())
-                .then(content =>{ name=content[Math.floor(Math.random()*250)]
-                });
+                .then(content =>{ name=content[Math.floor(Math.random()*250)]});
+                                 
 
           fetch("https://restcountries.eu/rest/v2/name/"+"name")
-            .then(res => res.json())
-            //.then(content => console.log(content))        
-            .then(content => {document.getElementById("country").innerHTML=JSON.stringify(content)});
+            .then(res => res.json())                 
+            .then(content => {var a=content;
+                                document.getElementById("country").innerHTML=JSON.stringify(a);
+                                document.getElementById("h1").innerHTML=JSON.stringify(a[0].name).substring(1,JSON.stringify(a[0].name).length-1)
+                                for(i in a[0])
+                                {
+                                    document.getElementById("country").innerHTML+=`<li>${JSON.stringify(i)}</li>`;
+
+                                }});
+
               
       }
    </script>>
 </head>
 <body>
-    <button onclick="getName()">a</button>
+    <button onclick="getName()">ok</button>
+    <h1 id="h1"></h1>
     <p id="country"></p>
 </body>
 </html>
